@@ -8,14 +8,14 @@ public class BubbleSort {
      *  O(N^2)
      *
      */
-    public static void bubbleSort(int[] arr){
+    public static <T> void bubbleSort(Comparable<T>[] arr){
         if (arr == null || arr.length < 2) {
             return;
         }
         for (int i = arr.length - 1; i >= 0; --i) {
             for (int j = 0; j < i; ++j) {
                 // 开始索引值和后一个值比较
-                if (arr[j] > arr[j + 1]){
+                if (less(arr[j + 1], arr[j])){
                     swap(arr, j, j + 1);
                 }
             }
@@ -23,19 +23,23 @@ public class BubbleSort {
         }
     }
 
+    private static <T> boolean less(Comparable<T> v, Comparable<T> w) {
+        return v.compareTo((T) w) < 0;
+    }
+
     /**
      *  交换数组中的两个值
      */
-    public static void swap(int[] arr, int i, int j) {
-        int temp = arr[j];
-        arr[j] = arr[i];
-        arr[i] = temp;
+    private static <T> void swap(Comparable<T>[] a, int i, int j){
+        Comparable<T> t = a[i];
+        a[i] = a[j];
+        a[j] = t;
     }
 
 
     public static void main(String[] args) {
-        int[] arr1 = Validator.generateRandomArray(5000, 5000);
-        int[] arr2 = Validator.copyArray(arr1);
+        Integer[] arr1 = Validator.generateRandomArray(5000, 5000);
+        Comparable<Integer>[] arr2 = Validator.copyArray(arr1);
         Validator.comparator(arr1);
         bubbleSort(arr2);
         Validator.printArray(arr1);

@@ -10,31 +10,34 @@ public class InsertSort {
      *  O(N^2)
      *
     */
-    public static void insertSort(int[] arr){
+    public static <T> void insertSort(Comparable<T>[] arr){
         if (arr == null || arr.length < 2) {
             return;
         }
         for (int i = 0; i <= arr.length - 1; ++i) {
             // 直到遇到比自己小的数为止
-            for (int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; --j) {
+            for (int j = i - 1; j >= 0 && less(arr[j + 1], arr[j]); --j) {
                 swap(arr, j, j + 1);
             }
         }
     }
 
-    /**
-    *  交换数组中的两个值
-    */
-    public static void swap(int[] arr, int i, int j) {
-        int temp = arr[j];
-        arr[j] = arr[i];
-        arr[i] = temp;
+    private static <T> boolean less(Comparable<T> v, Comparable<T> w) {
+        return v.compareTo((T) w) < 0;
     }
 
+    /**
+     *  交换数组中的两个值
+     */
+    private static <T> void swap(Comparable<T>[] a, int i, int j){
+        Comparable<T> t = a[i];
+        a[i] = a[j];
+        a[j] = t;
+    }
 
     public static void main(String[] args) {
-        int[] arr1 = Validator.generateRandomArray(5000, 5000);
-        int[] arr2 = Validator.copyArray(arr1);
+        Integer[] arr1 = Validator.generateRandomArray(5000, 5000);
+        Comparable<Integer>[] arr2 = Validator.copyArray(arr1);
         Validator.comparator(arr1);
         insertSort(arr2);
         Validator.printArray(arr1);

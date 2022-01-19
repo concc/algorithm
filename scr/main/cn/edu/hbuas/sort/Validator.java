@@ -7,15 +7,15 @@ public class Validator {
     /**
     *  排序对数器
     */
-    public static void comparator(int[] arr){
+    public static <T> void comparator(Comparable<T>[] arr){
         Arrays.sort(arr);
     }
 
     /**
     *  随机数组生成
     */
-    public  static int[] generateRandomArray(int maxSize, int maxValue) {
-        int[] arr = new int[(int) ((maxSize + 1) * Math.random())];
+    public  static Integer[] generateRandomArray(int maxSize, int maxValue) {
+        Integer[] arr = new Integer[(int) ((maxSize + 1) * Math.random())];
         for (int i = 0; i < arr.length; ++i){
             arr[i] = (int)((maxValue + 1) * Math.random() - (int)(maxValue * Math.random()));
         }
@@ -25,21 +25,19 @@ public class Validator {
     /**
     *  复制数组
     */
-    public static int[] copyArray(int[] arr) {
+    public static <T> Comparable<T>[] copyArray(Comparable<T>[] arr) {
         if (arr == null) {
             return null;
         }
-        int[] res = new int[arr.length];
-        for (int i = 0; i < arr.length; i++) {
-            res[i] = arr[i];
-        }
+        Comparable<T>[] res = new Comparable[arr.length];
+        System.arraycopy(arr, 0, res, 0, arr.length);
         return res;
     }
 
     /**
     *  判断数组是否相等
     */
-    public static boolean isEqual(int[] arr1, int[] arr2) {
+    public static <T> boolean isEqual(Comparable<T>[] arr1, Comparable<T>[] arr2) {
         if ((arr1 == null && arr2 != null) || (arr1 != null && arr2 == null)) {
             return false;
         }
@@ -50,14 +48,17 @@ public class Validator {
             return false;
         }
         for (int i = 0; i < arr1.length; i++) {
-            if (arr1[i] != arr2[i]) {
+            if (!arr1[i].equals(arr2[i])) {
                 return false;
             }
         }
         return true;
     }
 
-    public static void printArray(int[] arr) {
+    /**
+    *  打印数组内容
+    */
+    public static <T> void printArray(Comparable<T>[] arr) {
         if (arr == null) {
             return;
         }

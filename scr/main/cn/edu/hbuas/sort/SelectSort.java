@@ -9,7 +9,7 @@ public class SelectSort {
      *  O(N^2)
      *
      */
-    public static void selectSort(int[] arr){
+    public static <T> void selectSort(Comparable<T>[] arr){
         if (arr == null || arr.length < 2) {
             return;
         }
@@ -18,25 +18,29 @@ public class SelectSort {
             int minIndex = i;
             for (int j = i + 1; j < arr.length; ++j) {
                 // 找到除查找外数中，最小数的索引
-                minIndex = arr[j] < arr[minIndex] ? j : minIndex;
+                minIndex = less(arr[j], arr[minIndex]) ? j : minIndex;
             }
             swap(arr, i, minIndex);
         }
     }
 
+    private static <T> boolean less(Comparable<T> v, Comparable<T> w) {
+        return v.compareTo((T) w) < 0;
+    }
+
     /**
      *  交换数组中的两个值
      */
-    public static void swap(int[] arr, int i, int j) {
-        int temp = arr[j];
-        arr[j] = arr[i];
-        arr[i] = temp;
+    private static <T> void swap(Comparable<T>[] a, int i, int j){
+        Comparable<T> t = a[i];
+        a[i] = a[j];
+        a[j] = t;
     }
 
 
     public static void main(String[] args) {
-        int[] arr1 = Validator.generateRandomArray(5000, 5000);
-        int[] arr2 = Validator.copyArray(arr1);
+        Integer[] arr1 = Validator.generateRandomArray(5000, 5000);
+        Comparable<Integer>[] arr2 = Validator.copyArray(arr1);
         Validator.comparator(arr1);
         selectSort(arr2);
         Validator.printArray(arr1);
