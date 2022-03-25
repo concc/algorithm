@@ -1,24 +1,26 @@
-package cn.edu.hbuas.sort;
+package cn.edu.hbuas.base.sort;
 
-
-public class InsertSort {
+public class SelectSort {
 
 
     /**
-     *  插入排序思想： 从后往左遍历，当遇到开始索引 or 比自己小或相等的值则停下来
-     *  保证前面有序，如新增数字不符合有序，则挨个替换，直到有序停止
+     *  选择排序思想： 第一层循环查询最小的数，将该数与第一个数交换
+     *  交换后进入第二个数起始位置继续循环
      *  O(N^2)
      *
-    */
-    public static <T> void insertSort(Comparable<T>[] arr){
+     */
+    public static <T> void selectSort(Comparable<T>[] arr){
         if (arr == null || arr.length < 2) {
             return;
         }
-        for (int i = 0; i <= arr.length - 1; ++i) {
-            // 直到遇到比自己小的数为止
-            for (int j = i - 1; j >= 0 && less(arr[j + 1], arr[j]); --j) {
-                swap(arr, j, j + 1);
+        for (int i = 0; i < arr.length - 1; ++i) {
+            //初始索引
+            int minIndex = i;
+            for (int j = i + 1; j < arr.length; ++j) {
+                // 找到除查找外数中，最小数的索引
+                minIndex = less(arr[j], arr[minIndex]) ? j : minIndex;
             }
+            swap(arr, i, minIndex);
         }
     }
 
@@ -35,11 +37,12 @@ public class InsertSort {
         a[j] = t;
     }
 
+
     public static void main(String[] args) {
         Integer[] arr1 = Validator.generateRandomArray(5000, 5000);
         Comparable<Integer>[] arr2 = Validator.copyArray(arr1);
         Validator.comparator(arr1);
-        insertSort(arr2);
+        selectSort(arr2);
         Validator.printArray(arr1);
         Validator.printArray(arr2);
         if (Validator.isEqual(arr1, arr2)) {
@@ -48,4 +51,5 @@ public class InsertSort {
             System.out.println("排序算法验证未通过");
         }
     }
+
 }

@@ -1,4 +1,4 @@
-package cn.edu.hbuas.heap;
+package cn.edu.hbuas.base.heap;
 
 import java.util.Comparator;
 import java.util.Iterator;

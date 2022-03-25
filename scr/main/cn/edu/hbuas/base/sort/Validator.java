@@ -1,4 +1,4 @@
-package cn.edu.hbuas.sort;
+package cn.edu.hbuas.base.sort;
 
 
 import java.util.Arrays;

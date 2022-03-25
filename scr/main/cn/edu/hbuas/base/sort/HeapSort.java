@@ -1,7 +1,7 @@
-package cn.edu.hbuas.sort;
+package cn.edu.hbuas.base.sort;
 
 
-import cn.edu.hbuas.heap.PriorityQueue;
+import cn.edu.hbuas.base.heap.PriorityQueue;
 
 public class HeapSort {
 

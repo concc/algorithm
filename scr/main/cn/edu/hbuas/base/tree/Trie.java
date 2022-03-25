@@ -1,4 +1,4 @@
-package cn.edu.hbuas.tree;
+package cn.edu.hbuas.base.tree;
 
 public  class Trie {
 
